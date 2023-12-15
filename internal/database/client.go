@@ -17,10 +17,13 @@ type DatabaseClient interface {
 	AddCustomer(ctx context.Context, customer *models.Customer) (*models.Customer, error)
 
 	GetAllProducts(ctx context.Context, vendorID string) ([]models.Product, error)
+	AddProduct(ctx context.Context, product *models.Product) (*models.Product, error)
 
 	GetAllServices(ctx context.Context) ([]models.Service, error)
+	AddService(ctx context.Context, service *models.Service) (*models.Service, error)
 
 	GetAllVendors(ctx context.Context) ([]models.Vendor, error)
+	AddVendor(ctx context.Context, vendor *models.Vendor) (*models.Vendor, error)
 }
 
 type Client struct {
@@ -30,7 +33,7 @@ type Client struct {
 func NewDatabaseClient() (DatabaseClient, error) {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=%s",
 		"localhost",
-		"postgres",
+		"amiteshsinha",
 		"postgres",
 		"postgres",
 		5432,
