@@ -21,14 +21,17 @@ type Server interface {
 	GetAllProducts(ctx echo.Context) error
 	AddProduct(ctx echo.Context) error
 	GetProductById(ctx echo.Context) error
+	UpdateProduct(ctx echo.Context) error
 
 	GetAllServices(ctx echo.Context) error
 	AddService(ctx echo.Context) error
 	GetServiceById(ctx echo.Context) error
+	UpdateService(ctx echo.Context) error
 
 	GetAllVendors(ctx echo.Context) error
 	AddVendor(ctx echo.Context) error
 	GetVendorById(ctx echo.Context) error
+	UpdateVendor(ctx echo.Context) error
 }
 
 type EchoServer struct {
@@ -67,16 +70,19 @@ func (s *EchoServer) registerRoutes() {
 	pg.GET("", s.GetAllProducts)
 	pg.POST("", s.AddProduct)
 	pg.GET("/:id", s.GetProductById)
+	pg.PUT("/:id", s.UpdateProduct)
 
 	sg := s.echo.Group("/services")
 	sg.GET("", s.GetAllServices)
 	sg.POST("", s.AddService)
 	sg.GET("/:id", s.GetServiceById)
+	sg.PUT("/:id", s.UpdateService)
 
 	vg := s.echo.Group("/vendors")
 	vg.GET("", s.GetAllVendors)
 	vg.POST("", s.AddVendor)
 	vg.GET("/:id", s.GetVendorById)
+	vg.PUT("/:id", s.UpdateVendor)
 }
 
 func (s *EchoServer) Readiness(ctx echo.Context) error {
